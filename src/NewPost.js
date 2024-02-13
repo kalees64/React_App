@@ -16,6 +16,7 @@ const NewPost = ({posts,setPosts,navigate}) => {
     }
     const allPosts = [...posts,newPost]
     setPosts(allPosts.reverse())
+    localStorage.setItem("post_data",JSON.stringify(allPosts))
     setBodyValue('')
     setTitleValue('')
     setResult("New Post added Successfully")

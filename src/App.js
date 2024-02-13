@@ -14,7 +14,7 @@ function App() {
   const appTitle = "VK64 SOCIAL MEDIA"
   const navigate = useNavigate()
 
-  const [posts , setPosts] = useState([
+  const [posts , setPosts] = useState(JSON.parse(localStorage.getItem("post_data")) || [
     {
       id:1,
       title : "First Post",

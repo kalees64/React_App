@@ -27,6 +27,7 @@ const EditPost = ({posts,setPosts}) => {
             
         })
         setPosts(postList)
+        localStorage.setItem("post_data",JSON.stringify(postList))
         navigate(`/${post.id}`)
 
     }

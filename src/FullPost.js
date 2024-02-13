@@ -11,6 +11,7 @@ const FullPost = ({posts,setPosts}) => {
       const remainPosts = posts.filter((post)=>(post.id!==Number(id)))
 
       setPosts(remainPosts)
+      localStorage.setItem("post_data",JSON.stringify(remainPosts))
 
       navigate("/")
 
