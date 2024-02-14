@@ -1,17 +1,24 @@
 import { Link, useNavigate, useParams } from 'react-router-dom'
+import axios from './api/axios'
 
 const FullPost = ({posts,setPosts}) => {
     const {id} = useParams()
+    const allposts = posts
+    // console.log(typeof(id))
+    // console.log(allposts)
     const navigate = useNavigate()
 
-    const post = posts.find((post)=>post.id === Number(id))
+    const post = allposts.find((post)=>post.id === Number(id))
+    // const post2 = allposts.filter(post=>post.id===Number(id))
     // console.log(post)
+    // console.log(post2)
     const handleDelete = (id)=>{
 
-      const remainPosts = posts.filter((post)=>(post.id!==Number(id)))
+      const remainPosts = allposts.filter((post)=>(post.id!==Number(id)))
 
       setPosts(remainPosts)
-      localStorage.setItem("post_data",JSON.stringify(remainPosts))
+      // localStorage.setItem("post_data",JSON.stringify(remainPosts))
+      axios.delete(`/post/${post.id}`)
 
       navigate("/")
 

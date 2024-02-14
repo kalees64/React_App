@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
+import axios from './api/axios'
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 
 const NewPost = ({posts,setPosts,navigate}) => {
 
   const [titleValue,setTitleValue] = useState('')
   const [bodyValue,setBodyValue] = useState('')
-  const [result,setResult] = useState('')
+  // const [result,setResult] = useState('')
 
   const handleSubmit=(e)=>{
     e.preventDefault()
@@ -15,11 +18,13 @@ const NewPost = ({posts,setPosts,navigate}) => {
       body : bodyValue
     }
     const allPosts = [...posts,newPost]
-    setPosts(allPosts.reverse())
-    localStorage.setItem("post_data",JSON.stringify(allPosts))
+    setPosts(allPosts)
+    // localStorage.setItem("post_data",JSON.stringify(allPosts))
+    axios.post('/post',newPost)
     setBodyValue('')
     setTitleValue('')
-    setResult("New Post added Successfully")
+    toast("New post Added Successfully")
+    // setResult("New Post added Successfully")
     navigate('/')
   }
 
@@ -45,8 +50,9 @@ const NewPost = ({posts,setPosts,navigate}) => {
           <button
           type='submit'
           >Submit</button>
-          <p>{result}</p>
+          {/* <p>{result}</p> */}
         </form>
+        <ToastContainer/>
     </div>
   )
 }

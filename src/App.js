@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import './App.css'
 import PostPage from "./PostPage"
@@ -8,29 +8,23 @@ import NewPost from "./NewPost"
 import FullPost from "./FullPost"
 import NotFound from './NotFound'
 import EditPost from "./EditPost";
+import axios from "./api/axios";
 
 function App() {
 
   const appTitle = "VK64 SOCIAL MEDIA"
   const navigate = useNavigate()
 
-  const [posts , setPosts] = useState(JSON.parse(localStorage.getItem("post_data")) || [
-    {
-      id:1,
-      title : "First Post",
-      body : "It was the First Post"
-    },
-    {
-      id:2,
-      title : "Second Post",
-      body : "It was the Second Post"
-    },
-    {
-      id:3,
-      title : "Third Post",
-      body : "It was the Third Post"
+  const [posts , setPosts] = useState([])
+
+  useEffect(()=>{
+    const fetchData=async()=>{
+      const res = await axios.get('/post')
+      // console.log(res.data)
+      setPosts(res.data)
     }
-  ])
+    (async()=>await fetchData())()
+  },[])
 
   //Edit Page
   
@@ -39,7 +33,7 @@ function App() {
     <div className="app-body">
       <Header title={appTitle}/>
       <Routes>
-        <Route path="/" element={<PostPage posts={posts}/>} />
+        <Route path="/" element={<PostPage posts={posts.reverse()}/>} />
         <Route path="/about" element={<About/>}/>
         <Route path="/post" element={<NewPost 
           posts={posts}

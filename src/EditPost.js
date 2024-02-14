@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import axios from './api/axios'
 
 const EditPost = ({posts,setPosts}) => {
 
@@ -27,7 +28,8 @@ const EditPost = ({posts,setPosts}) => {
             
         })
         setPosts(postList)
-        localStorage.setItem("post_data",JSON.stringify(postList))
+        // localStorage.setItem("post_data",JSON.stringify(postList))
+        axios.put(`/post/${post.id}`)
         navigate(`/${post.id}`)
 
     }

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 
 const PostPage = ({posts}) => {
 
+  // const updatedPost = posts.reverse()
   // const [searchValue,setSearchValue]= useState('')
 
   // const [filterPosts,setFilterPosts] = useState(posts)
