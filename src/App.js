@@ -20,6 +20,7 @@ function App() {
   useEffect(()=>{
     const fetchData=async()=>{
       const res = await axios.get('/post')
+      // const res = JSON.parse(localStorage.getItem("post_data"))
       console.log(res.data)
       setPosts(res.data)
     }

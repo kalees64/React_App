@@ -10,8 +10,8 @@ const FullPost = ({posts,setPosts}) => {
     const handleDelete = (id)=>{
 
       const remainPosts = allposts.filter((post)=>(post.id!==Number(id)))
-      axios.delete(`/post/${post.id}`)
       setPosts(remainPosts)
+      axios.delete(`/post/${post.id}`)
       // localStorage.setItem("post_data",JSON.stringify(remainPosts))
       navigate("/")
 
