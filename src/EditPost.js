@@ -6,7 +6,7 @@ const EditPost = ({posts,setPosts}) => {
 
     const {id} = useParams()
     const navigate = useNavigate()
-    const post = posts.find((post)=>post.id===Number(id))
+    const post = posts.find((post)=>post.id.toString()===id)
     const [editTitle,setEditTitle]= useState(post.title)
     const [editBody,setEditBody]= useState(post.body)
 
@@ -29,8 +29,8 @@ const EditPost = ({posts,setPosts}) => {
         })
         setPosts(postList)
         // localStorage.setItem("post_data",JSON.stringify(postList))
-        axios.put(`/post/${post.id}`)
-        navigate(`/${post.id}`)
+        axios.put(`/post/${post.id}`,editPost)
+        navigate('/')
 
     }
 

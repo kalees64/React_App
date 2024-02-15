@@ -3,23 +3,16 @@ import axios from './api/axios'
 
 const FullPost = ({posts,setPosts}) => {
     const {id} = useParams()
-    const allposts = posts
-    // console.log(typeof(id))
-    // console.log(allposts)
+    const allposts = posts.map(post=>post)
     const navigate = useNavigate()
 
-    const post = allposts.find((post)=>post.id === Number(id))
-    // const post2 = allposts.filter(post=>post.id===Number(id))
-    // console.log(post)
-    // console.log(post2)
+    const post = allposts.find((post)=>post.id.toString() === id)
     const handleDelete = (id)=>{
 
       const remainPosts = allposts.filter((post)=>(post.id!==Number(id)))
-
+      axios.delete(`/post/${post.id}`)
       setPosts(remainPosts)
       // localStorage.setItem("post_data",JSON.stringify(remainPosts))
-      axios.delete(`/post/${post.id}`)
-
       navigate("/")
 
     }

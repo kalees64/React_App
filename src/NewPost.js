@@ -19,11 +19,11 @@ const NewPost = ({posts,setPosts,navigate}) => {
     }
     const allPosts = [...posts,newPost]
     setPosts(allPosts)
+    toast("New post Added Successfully")
     // localStorage.setItem("post_data",JSON.stringify(allPosts))
     axios.post('/post',newPost)
     setBodyValue('')
     setTitleValue('')
-    toast("New post Added Successfully")
     // setResult("New Post added Successfully")
     navigate('/')
   }

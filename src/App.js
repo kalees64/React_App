@@ -16,14 +16,14 @@ function App() {
   const navigate = useNavigate()
 
   const [posts , setPosts] = useState([])
-
+  // console.log(typeof(posts))
   useEffect(()=>{
     const fetchData=async()=>{
       const res = await axios.get('/post')
-      // console.log(res.data)
+      console.log(res.data)
       setPosts(res.data)
     }
-    (async()=>await fetchData())()
+    fetchData()
   },[])
 
   //Edit Page
