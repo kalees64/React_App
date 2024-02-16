@@ -11,16 +11,17 @@ const EditPost = ({posts,setPosts}) => {
     const [editBody,setEditBody]= useState(post.body)
 
 
-    const handleEdit =(e)=>{
+    const handleEdit =async(e)=>{
         e.preventDefault()
         const editPost ={
             id:Number(id),
             title : editTitle,
             body: editBody
         }
+        const res = await axios.put(`/post/${post.id}`,editPost)
         const postList = posts.map((post)=>{
-            if(post.id === Number(id)){
-                return editPost
+            if(post.id.toString() === id){
+                return res.data
             }
             else {
                 return post
@@ -29,7 +30,6 @@ const EditPost = ({posts,setPosts}) => {
         })
         setPosts(postList)
         // localStorage.setItem("post_data",JSON.stringify(postList))
-        axios.put(`/post/${post.id}`,editPost)
         navigate('/')
 
     }

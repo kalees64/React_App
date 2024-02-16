@@ -7,11 +7,11 @@ const FullPost = ({posts,setPosts}) => {
     const navigate = useNavigate()
 
     const post = allposts.find((post)=>post.id.toString() === id)
-    const handleDelete = (id)=>{
+    const handleDelete = async(id)=>{
 
-      const remainPosts = allposts.filter((post)=>(post.id!==Number(id)))
+      const remainPosts = allposts.filter((post)=>(post.id!==id))
+      await axios.delete(`/post/${post.id}`)
       setPosts(remainPosts)
-      axios.delete(`/post/${post.id}`)
       // localStorage.setItem("post_data",JSON.stringify(remainPosts))
       navigate("/")
 

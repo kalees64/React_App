@@ -9,7 +9,7 @@ const NewPost = ({posts,setPosts,navigate}) => {
   const [bodyValue,setBodyValue] = useState('')
   // const [result,setResult] = useState('')
 
-  const handleSubmit=(e)=>{
+  const handleSubmit=async(e)=>{
     e.preventDefault()
     let idvalue = posts.length? posts[posts.length-1].id +1:1
     const newPost = {
@@ -17,15 +17,15 @@ const NewPost = ({posts,setPosts,navigate}) => {
       title : titleValue,
       body : bodyValue
     }
-    const allPosts = [...posts,newPost]
+    const res = await axios.post('/post',newPost)
+    const allPosts = [...posts,res.data]
     setPosts(allPosts)
-    toast("New post Added Successfully")
     // localStorage.setItem("post_data",JSON.stringify(allPosts))
-    axios.post('/post',newPost)
     setBodyValue('')
     setTitleValue('')
     // setResult("New Post added Successfully")
     navigate('/')
+    toast("New post Added Successfully")
   }
 
   return (
